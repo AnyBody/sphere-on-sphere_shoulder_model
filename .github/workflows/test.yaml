@@ -33,6 +33,8 @@ jobs:
       - uses: prefix-dev/setup-pixi@v0.9.1
         with:
           manifest-path: sos-shoulder-model/pixi.toml
+          activate-environment: true
+
 
       - name: Run tests
         run: |
