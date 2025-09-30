@@ -35,7 +35,7 @@ Main.HumanModel.BodyModel.Right.ShoulderArm.Mus = {
     AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_1; 
     AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_1; 
     AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_1; 
-    viewMuscle = {#include "<ANYBODY_PATH_INSTALLDIR>/AMMR/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
     SPLine.StringMesh = 20;
     AnySurfEllipsoid &Surf =.art_gh_humRef;
     
@@ -55,7 +55,7 @@ Main.HumanModel.BodyModel.Right.ShoulderArm.Mus = {
     AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_2; 
     AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_2; 
     AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_2; 
-    viewMuscle = {#include "<ANYBODY_PATH_INSTALLDIR>/AMMR/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
     SPLine.StringMesh = 20;
     AnySurfEllipsoid &Surf =.art_gh_humRef;
     
@@ -72,7 +72,7 @@ Main.HumanModel.BodyModel.Right.ShoulderArm.Mus = {
     AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_3; 
     AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_3; 
     AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_3; 
-    viewMuscle = {#include "<ANYBODY_PATH_INSTALLDIR>/AMMR/Body/AAUHuman/drawSettings/MusDrawSettings.any"};  SPLine.StringMesh = 20;
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};  SPLine.StringMesh = 20;
     AnySurfEllipsoid &Surf =.art_gh_humRef;
     
     // added wrapping surfaces   
@@ -87,7 +87,7 @@ Main.HumanModel.BodyModel.Right.ShoulderArm.Mus = {
     AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_4; 
     AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_4; 
     AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_4; 
-    viewMuscle = {#include "<ANYBODY_PATH_INSTALLDIR>/AMMR/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
     SPLine.StringMesh = 20;
     AnySurfEllipsoid &Surf =.art_gh_humRef;
     
@@ -102,7 +102,7 @@ Main.HumanModel.BodyModel.Right.ShoulderArm.Mus = {
     AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_5; 
     AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_5; 
     AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_5; 
-    viewMuscle = {#include "<ANYBODY_PATH_INSTALLDIR>/AMMR/Body/AAUHuman/drawSettings/MusDrawSettings.any"};  SPLine.StringMesh = 20;
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};  SPLine.StringMesh = 20;
     AnySurfEllipsoid &Surf =.art_gh_humRef;
     
     // added wrapping surfaces    
@@ -116,7 +116,7 @@ Main.HumanModel.BodyModel.Right.ShoulderArm.Mus = {
     AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_6; 
     AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_6; 
     AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_6; 
-    viewMuscle = {#include "<ANYBODY_PATH_INSTALLDIR>/AMMR/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
     SPLine.StringMesh = 20;
     AnySurfEllipsoid &Surf =.art_gh_humRef;
     
