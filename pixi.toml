@@ -1,0 +1,14 @@
+[workspace]
+authors = ["Morten Enemark Lund <mel@anybodytech.com>"]
+channels = ["https://prefix.dev/conda-forge", "https://prefix.dev/anybody"]
+name = "sphere-on-sphere_shoulder_model"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+test = {cmd= "pytest", cwd = "Tests"}
+
+[dependencies]
+anypytools = ">=1.17.1,<2"
+anybodycon = ">=8.1.4,<9"
+pytest = ">=8.4.2,<9"
