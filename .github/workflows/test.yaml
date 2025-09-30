@@ -40,4 +40,7 @@ jobs:
         run: |
           cd sos-shoulder-model/Tests
           pytest
+        env:
+          RLM_LICENSE: ${{ secrets.LICENSE_TEST_SERVER }}
+          RLM_LICENSE_PASSWORD: ${{ secrets.LICENSE_TEST_SERVER_PASSWORD }}
 
