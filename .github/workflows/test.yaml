@@ -14,12 +14,12 @@ jobs:
     runs-on: windows-latest
     steps:
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: sos-shoulder-model
 
       - name: Checkout AMMR
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: AnyBody/ammr
           ref: master
