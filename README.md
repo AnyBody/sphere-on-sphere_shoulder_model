@@ -36,28 +36,26 @@
 This repository contains an AnyBody Modeling System implementation of a sphere-on-sphere glenohumeral (GH) joint formulation coupled with an FDK (Force-Dependent Kinematics) solution strategy. The approach enables the humeral head to translate relative to the glenoid in response to the balance of muscle, passive, and joint reaction forces—rather than prescribing a fixed center of rotation.
 
 The model was developed to investigate how altering joint congruence (relative radii of the humeral head and glenoid representation) affects:
-- Humeral head translations (mediolateral, inferosuperior, anteroposterior)
+- Humeral head translations (inferosuperior, anteroposterior)
 - Rotator cuff muscle force demands (e.g., supraspinatus, infraspinatus, subscapularis)
-- Joint stabilization strategies during abduction and flexion tasks
+- Joint stabilization strategies during abduction task
 
 > NOTE: This README summarizes the published work without reproducing copyrighted figures or verbatim text. Please consult the linked open-access article for full methodological and result details.
 
 ## Key Features
 - Sphere-on-sphere analytic GH joint geometry with configurable radii (`rh`, `rg`).
 - FDK-controlled translational DOFs (2 directions) of the humeral head allowing force-driven gliding.
-- Passive elastic restraint (separable linear spring terms `kML`, `kIS`, `kAP`).
-- Detailed rotator cuff & deltoid muscle representation with customizable maximal forces.
 - Parameterized morphotype inputs to explore anatomical variation (radii, insertion adjustments, offsets).
-- Abduction and flexion moment arm evaluation utilities (`EvaluateAbductionMomentArm.any`, etc.).
+- Abduction moment arm evaluation utility (`EvaluateAbductionMomentArm.any`, etc.).
 - Output scripting for extracting muscle forces, joint translations, and reaction loads.
 
 ## Scientific Background
-Shoulder stability in vivo at mid-range elevation primarily depends on coordinated rotator cuff force production counteracting low intrinsic bony congruence. Reducing congruence (e.g., increasing mismatch between humeral and glenoid radii) can:
-1. Increase translational compliance (larger permissible head excursions).
+Shoulder stability in vivo at mid-range elevation primarily depends on the coordinated production of rotator cuff forces counteracting destabilizing detloid forces. Reducing congruence (e.g., increasing mismatch between humeral and glenoid radii) can:
+1. Increase humeral head translations.
 2. Elevate required compressive and balancing muscle forces to maintain centering.
 3. Alter directionality of resultant joint reaction vectors.
 
-This model operationalizes these mechanisms by making spherical contact distance a constraint while leaving select in-plane translations force-dependent (FDK). The published simulations reported systematic increases in both humeral head displacement and rotator cuff force magnitudes when congruence decreased—qualitatively matching experimental imaging trends.
+This model represents the glenohumeral joint as a connecting rod rather than a traditional ball-and-socket. The published simulations reported systematic increases in both humeral head displacement and rotator cuff force magnitudes when congruence decreased—qualitatively matching experimental imaging trends.
 
 <!-- ### Conceptual Diagram (Add Later)
 You can add a schematic here (e.g., `docs/fig_concept.png`) illustrating:
@@ -110,12 +108,12 @@ git clone https://github.com/AnyBody/sphere-on-sphere_shoulder_model.git
 
 ## How to Run a Simulation
 1. Open `GH_2spheres.main.any`.
-2. (Optional) Select a study (e.g., abduction vs flexion) if multiple are defined.
+2. (Optional) Select a study (e.g., abduction) if multiple are defined.
 3. Run: Kinematics → Inverse Dynamics (FDK will iterate internally on allowed DOFs).
 4. Export desired outputs via `AnyOutputFile.any` or add custom `AnyOutputFile` statements.
 
 ### Evaluating Moment Arms
-Scripts such as `EvaluateAbductionMomentArm.any` can be included or loaded after the main file to compute functional muscle leverage in specific planes.
+Scripts such as `EvaluateAbductionMomentArm.any` can be included or loaded after the main file to compute functional muscle moment arm in specific planes.
 
 ## Parameterization
 Central user-editable inputs live in `Input/InputVariables.any`.
@@ -147,14 +145,12 @@ Key constructs:
 - `AnyKinEqSimpleDriver GH_contact`: maintains constant center separation = `rg - rh` (geometric congruence constraint).
 - `AnyKinLinear GHLin`: measures 3D vector between sphere centers.
 - `GH_fdk`: FDK driver enabling force-dependent solution for two translational components (`MeasureOrganizer = {1,2}`) while constraining distance.
-- `ShoulderPE`: passive elastic force generator using linear stiffnesses.
 
 ## Output & Post-Processing
 Add or modify `AnyOutputFile` blocks (see `Model/AnyOutputFile.any` if present) to extract:
 - Muscle forces per time step (`Fm`)
 - Joint reaction forces and moments
 - Humeral head translation (`GHLin.Pos`) in scapular frame
-- Rotational kinematics (`GHrot.Pos`)
 
 Example snippet (conceptual):
 ```anyscript
