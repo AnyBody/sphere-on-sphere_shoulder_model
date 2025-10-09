@@ -1,0 +1,246 @@
+/// Force-moment-measure measuring forces applied to given segment, here the humerus
+/// A point of interest is given by RefPoint, and this is the reference for the moment contributions.
+/// Three forces, muscles and gravity, have been included in the measurement
+AnyForceMomentMeasure2 ForceMeasure_infra = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_5, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_6};
+  
+  IncludeGravity = Off;
+}; //end infra
+
+//AnyForceMomentMeasure2 ForceMeasure_supra = {
+//  
+//  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+//  
+//  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+//  
+//  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.supraspinatus_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.supraspinatus_2, 
+//    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.supraspinatus_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.supraspinatus_4,
+//    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.supraspinatus_5, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.supraspinatus_6};
+//  
+//  IncludeGravity = Off;
+//};//end supra
+
+AnyForceMomentMeasure2 ForceMeasure_My_supra = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_5, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_6};
+  
+  IncludeGravity = Off;
+};//end supra
+
+
+AnyForceMomentMeasure2 ForceMeasure_subscap = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_5, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_6};
+  
+  IncludeGravity = Off;
+};//end subscap
+
+AnyForceMomentMeasure2 ForceMeasure_biceps_lh = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.biceps_brachii_caput_longum};
+  
+  IncludeGravity = Off;
+};//end subscap
+
+
+AnyForceMomentMeasure2 ForceMeasure_delt_ant = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_anterior_part_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_anterior_part_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_anterior_part_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_anterior_part_4
+  };
+  
+  IncludeGravity = Off;
+};//end delt ant
+
+AnyForceMomentMeasure2 ForceMeasure_delt_lat = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_4
+  };
+  
+  IncludeGravity = Off;
+};//end delt lat
+
+
+AnyForceMomentMeasure2 ForceMeasure_delt_post = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_posterior_part_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_posterior_part_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_posterior_part_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_posterior_part_4
+  };
+  IncludeGravity = Off;
+  };//end delt post
+  
+  AnyForceMomentMeasure2 ForceMeasure_biceps_short = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.biceps_brachii_caput_breve  };
+  IncludeGravity = Off;
+  };//end biceps court
+  
+    AnyForceMomentMeasure2 ForceMeasure_coracobrachialis = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_6
+  };
+  IncludeGravity = Off;
+  };//end coracobrachialis
+
+AnyForceMomentMeasure2 ForceMeasure_teres_major = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = { &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_6
+  };
+  IncludeGravity = Off;
+  };//end teres_major
+  
+  AnyForceMomentMeasure2 ForceMeasure_teres_minor = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_6
+  };
+  IncludeGravity = Off;
+  };//end teres_minor
+  
+  AnyForceMomentMeasure2 ForceMeasure_Triceps = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.Triceps_LH_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.Triceps_LH_2  };
+  IncludeGravity = Off;
+  };//end Triceps
+
+
+  
+AnyForceMomentMeasure2 ForceMeasure_others = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.biceps_brachii_caput_breve,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.Triceps_LH_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.Triceps_LH_2 
+  };
+  IncludeGravity = Off;
+  };
+  
+  AnyForceMomentMeasure2 ForceMeasure_total = {
+  
+  RefPoint = &Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+  IncludeSegments = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus};
+  
+  IncludeForces = {&Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.biceps_brachii_caput_breve,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.coracobrachialis_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_major_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_3,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_5,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.teres_minor_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.Triceps_LH_1,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.Triceps_LH_2,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_5, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.infraspinatus_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_5, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.My_supraspinatus_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_5, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.subscapularis_6,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.biceps_brachii_caput_longum,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_anterior_part_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_anterior_part_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_anterior_part_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_anterior_part_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_4,
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_posterior_part_1, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_posterior_part_2, 
+    &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_posterior_part_3, &Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_posterior_part_4    
+  };
+  IncludeGravity = Off;
+  };
+  
+  //end delt post
+
+
+

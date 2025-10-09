@@ -1,0 +1,24 @@
+// Morphs the original scapula stl to extend the length of the acromion in the x direction
+
+//Scapula morphing
+#define BM_SCALING _SCALING_STANDARD_
+
+HumanModel.Scaling.GeometricalScaling = { 
+  
+  Right.Scapula= {
+    #include "Scapula/ScalingLawScapula.any"
+    ScaleFunction.Custom = &MyScalingLaw.MyTransform;
+  }; 
+  
+  Right.Humerus= {
+    #include "Humerus/ScalingLawHumerus.any"
+    ScaleFunction.Custom = &MyScalingLaw.MyTransform;
+  }; 
+  
+  
+}; // GeometricalScaling
+
+
+
+
+

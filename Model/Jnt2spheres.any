@@ -1,0 +1,153 @@
+//Definition of the GH joint as a sphere on sphere joint
+AnyFolder GH_2spheres =
+{
+  //Definition of sphere parameters; from Yamani, L. Statistical Shape Model
+  AnyFloat rh = Main.InputVariables.MorphotypeParameters.rh;
+  AnyFloat rg = Main.InputVariables.MorphotypeParameters.rg;
+  
+  // Sphere representing the center of humeral head. 
+  Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.gh ={
+    AnyRefNode Humerus_sphere_center ={
+      sRel = {-0.0001, 0.0, 0.0};
+      AnySurfSphere HH_sphere = 
+      {
+        Radius = Main.Model.GH_2spheres.rh;
+        AnyDrawParamSurf drw = {
+          RGB = {0, 0, 1};
+          Opacity = 1.0;
+        };
+      };
+    };
+  };
+  
+  // Sphere representing the center of glenoid fossa. 
+  Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh = {
+    AnyRefNode Glenoid_sphere_center ={
+      sRel = Main.InputVariables.MorphotypeParameters.glenoid_offset; //to be defined with a python sphere fitting code
+      AnySurfSphere Glenoid_sphere = 
+      {
+        Radius = Main.Model.GH_2spheres.rg;
+        AnyDrawParamSurf drw = {
+          RGB = {0, 0.6, 0.6};
+          Opacity = 0.5;   
+        };
+      };
+    }; 
+    
+    //Referential in contact with the spheres, attached to the scapula. 
+    //     Used to measure translations of the humeral head in the scapula referential.       
+    AnyRefNode Glenoid_contact_ref ={
+      sRel = {-(Main.Model.GH_2spheres.rg - Main.Model.GH_2spheres.rh),0.00,0.0}; 
+      ARel = RotMat(90*pi/180, y); //pour avoir le repere avec lat+, sup+ et ant+
+      viewRefFrame.Visible = On;   
+    }; 
+  };  
+  
+  //Sphere on sphere joint definition
+  Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt = {  
+    
+    // GH joint defined as a length constraint on a pline through both centers. Simulated contact between spheres.
+    AnyKinEqSimpleDriver GH_contact = {
+      AnyKinPLine pline = {
+        AnyRefFrame &ori = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_sphere_center;
+        AnyRefFrame &ins = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.gh.Humerus_sphere_center;
+      };
+      DriverPos = {Main.Model.GH_2spheres.rg - Main.Model.GH_2spheres.rh};
+      //      DriverPos = {0.0};
+      DriverVel = {0.0};
+      //      CType = {Soft};
+      Reaction.Type = {On};
+      Reaction.viewForce.Visible = On;
+    };
+    
+    //Measure to obtain the GH translation project on the glene surface
+    AnyKinLinear HHT = {
+      AnyRefFrame &ori = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+      AnyRefFrame &ins = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.gh.Humerus_sphere_center;
+    };
+    
+    //Measure to obtain the GH rotation between hum and scapula
+    AnyKinRotational GHrot = 
+    {
+      Type = RotVector;
+      AnyRefFrame &ori = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref;
+      AnyRefFrame &ins = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.gh.Humerus_sphere_center;
+    };
+    
+    
+    //Measurement between sphere centers. 
+    AnyKinLinear GHLin = {
+      AnyRefFrame &ori = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_sphere_center;
+      AnyRefFrame &ins = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.gh.Humerus_sphere_center;
+      Ref = 0; // mesure dans le repere de la scapula (-1 = ref global, 1= ref humerus)
+      AnyDrawPLine drw = {
+        RGB = {0,1,0};
+        
+      };
+      
+    };
+    
+    
+    //     FDK driver to represent the two possible movements of the humeral head
+    AnyKinEqSimpleDriver GH_fdk = {
+      AnyKinLinear &ref = .GHLin;    
+      MeasureOrganizer = {1,2};
+      DriverPos = {0,0};
+      DriverVel = {0,0};
+      CType = {ForceDep, ForceDep};
+      Reaction.Type = {Off, Off};
+      
+    };
+    
+    
+    
+    //     Define springs in the shoulder, simulating the effect of passive elements
+    AnyForce ShoulderPE = {   
+      AnyKinLinear &ref = .GHLin; 
+      
+      AnyFloat Eps = {
+        Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHLin.Pos[0], 
+        Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHLin.Pos[1], 
+        Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHLin.Pos[2]   
+      };
+      
+      //            AnyVar k0 = Main.InputVariables.FDK.k0;   
+      //            AnyVar k1 = Main.InputVariables.FDK.k1;  
+      //            AnyVar k2 = Main.InputVariables.FDK.k2;
+      //            AnyVar k3 = Main.InputVariables.FDK.k3;
+      //            AnyVar k4 = Main.InputVariables.FDK.k4; 
+      //            AnyVar kz = Main.InputVariables.FDK.kz;
+      //            
+      AnyVar kML = Main.InputVariables.FDK.kML;
+      AnyVar kIS = Main.InputVariables.FDK.kIS;
+      AnyVar kAP = Main.InputVariables.FDK.kAP;
+      
+      
+      //            F={ 
+      //              kz*Eps[0],
+      //              -(k0 + k1*Eps[1] + k2*Eps[1]^2 + k3*Eps[1]^3 + k4*Eps[1]^4),
+      //              -(k0 + k1*Eps[2] + k2*Eps[2]^2 + k3*Eps[2]^3 + k4*Eps[2]^4)
+      //            };   
+      
+      F={ 
+        kML*Eps[0],
+        kIS*Eps[1],
+        kAP*Eps[2]
+      }; 
+      
+    };
+    
+    
+  };
+  
+  
+  
+  
+}; 
+//end off GH_2spheres
+
+
+
+
+
+

@@ -1,0 +1,136 @@
+// Adaptation of the AMMR 3.0.1 definition of the supraspinatus
+#include "MySupraspinatusMusMdl.any"
+
+// New wrapping surfaces
+Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula = {
+  
+  // Torus to avoid penetrations on the scapular spine
+  AnyRefNode My_supraspinatus_torus ={
+    sRel = {-0.015, -0.012, -0.027};
+    ARel = RotMat(-pi/2, y);
+    
+    AnyDrawRefFrame drw = {Visible=Off;};
+    AnySurfTorus surface = {
+      MajorRadius = 0.03;
+      MinorRadius = 0.01;
+      viewSurface = {Visible=On; RGB={0.65, 0.65, 0.65}; Opacity=0.8;};
+    }; // surface
+    
+  }; // My_supraspinatus_torus
+  
+}; // Scapula
+
+Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.gh = {   
+  AnyDrawRefFrame drw = {Visible=Off;};
+  AnySurfSphere surface = {
+    Radius = Main.InputVariables.MusclesPersonalization.SphereSupraWrapR; //0.028 bon compromis
+    viewSurface = {Visible=On; RGB={0.65, 0.65, 0.65}; Opacity=0.8;};
+  }; // surface
+  
+}; // My_supraspinatus_sphere
+
+
+Main.HumanModel.BodyModel.Right.ShoulderArm.Mus = {
+  AnyMuscleShortestPath My_supraspinatus_1 = {
+    AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_1; 
+    AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_1; 
+    AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_1; 
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
+    SPLine.StringMesh = 20;
+    AnySurfEllipsoid &Surf =.art_gh_humRef;
+    
+    // added wrapping surfaces    
+    AnySurfSphere &Surf2 = ..Seg.Humerus.gh.surface;
+    AnySurfTorus &Surf3 = ..Seg.Scapula.My_supraspinatus_torus.surface;   
+    
+    SPLine = {
+      // Initially the fiber will go through the center of the tore 
+      AnyMatrix InitWrapPos = {transf3D({0.0, 0.0, 0.0}, &.Surf3)};        
+      
+      InitWrapPosVecArr = {&InitWrapPos};
+    }; 
+  };
+  
+  AnyMuscleShortestPath My_supraspinatus_2 = {
+    AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_2; 
+    AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_2; 
+    AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_2; 
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
+    SPLine.StringMesh = 20;
+    AnySurfEllipsoid &Surf =.art_gh_humRef;
+    
+    // added wrapping surfaces    
+    
+    AnySurfSphere &Surf2 = ..Seg.Humerus.gh.surface;    
+    AnySurfTorus &Surf3 = ..Seg.Scapula.My_supraspinatus_torus.surface; 
+    
+    SPLine.InitWrapPosVecArr = .My_supraspinatus_1.SPLine.InitWrapPosVecArr;   
+    
+  };
+  
+  AnyMuscleShortestPath My_supraspinatus_3 = {
+    AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_3; 
+    AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_3; 
+    AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_3; 
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};  SPLine.StringMesh = 20;
+    AnySurfEllipsoid &Surf =.art_gh_humRef;
+    
+    // added wrapping surfaces   
+    
+    AnySurfSphere &Surf2 = ..Seg.Humerus.gh.surface;  
+    AnySurfTorus &Surf3 = ..Seg.Scapula.My_supraspinatus_torus.surface; 
+    
+    SPLine.InitWrapPosVecArr = .My_supraspinatus_1.SPLine.InitWrapPosVecArr;
+  };
+  
+  AnyMuscleShortestPath My_supraspinatus_4 = {
+    AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_4; 
+    AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_4; 
+    AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_4; 
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
+    SPLine.StringMesh = 20;
+    AnySurfEllipsoid &Surf =.art_gh_humRef;
+    
+    // added wrapping surfaces    
+    AnySurfSphere &Surf2 = ..Seg.Humerus.gh.surface;
+    AnySurfTorus &Surf3 = ..Seg.Scapula.My_supraspinatus_torus.surface; 
+    
+    SPLine.InitWrapPosVecArr = .My_supraspinatus_1.SPLine.InitWrapPosVecArr;
+  };
+  
+  AnyMuscleShortestPath My_supraspinatus_5 = {
+    AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_5; 
+    AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_5; 
+    AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_5; 
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};  SPLine.StringMesh = 20;
+    AnySurfEllipsoid &Surf =.art_gh_humRef;
+    
+    // added wrapping surfaces    
+    AnySurfSphere &Surf2 = ..Seg.Humerus.gh.surface;
+    AnySurfTorus &Surf3 = ..Seg.Scapula.My_supraspinatus_torus.surface; 
+    
+    SPLine.InitWrapPosVecArr = .My_supraspinatus_1.SPLine.InitWrapPosVecArr;
+  };
+  
+  AnyMuscleShortestPath My_supraspinatus_6 = {
+    AnyMuscleModel &MusMdl = ..MuscleModels.My_supraspinatus_6; 
+    AnyRefNode &Org = ..Seg.Scapula.O_supraspinatus_6; 
+    AnyRefNode &Ins = ..Seg.Humerus.I_supraspinatus_6; 
+    viewMuscle = {#include "<ANYBODY_PATH_AMMR>/Body/AAUHuman/drawSettings/MusDrawSettings.any"};
+    SPLine.StringMesh = 20;
+    AnySurfEllipsoid &Surf =.art_gh_humRef;
+    
+    // added wrapping surfaces    
+    AnySurfSphere &Surf2 = ..Seg.Humerus.gh.surface;
+    AnySurfTorus &Surf3 = ..Seg.Scapula.My_supraspinatus_torus.surface; 
+    
+    SPLine.InitWrapPosVecArr = .My_supraspinatus_1.SPLine.InitWrapPosVecArr;
+  };
+  
+}; //Mus
+
+
+
+
+
+

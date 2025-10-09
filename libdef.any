@@ -1,0 +1,14 @@
+#ifpathexists "../libdef.any"
+#include "../libdef.any"
+#else 
+#include "<ANYBODY_PATH_INSTALLDIR>/ammr/libdef.any"
+
+#endif
+
+#if AMMR_VERSION_MAJOR < 2 |  (AMMR_VERSION_MAJOR <= 2 & AMMR_VERSION_MINOR < 4)
+
+Main =  {
+ERROR "Wrong AMMR version. Please modify libdef.any to point to the correct AMMR (>=2.4)"
+};
+#endif
+

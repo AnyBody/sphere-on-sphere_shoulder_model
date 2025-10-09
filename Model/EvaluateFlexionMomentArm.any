@@ -1,0 +1,16 @@
+AnyFolder EvaluateMomentArms = {
+  
+  AnyFolder &Mus=Main.HumanModel.BodyModel.Right.ShoulderArm.Mus;
+ 
+  // Mettre la meme formule que celle mise dans la vitesse angulaire du driver d'abduction dans AngularVelocity  
+  AnyVar AngularVelocity = 90*pi/180;
+  
+
+  #define _CODE_MACRO_(name) \
+  // Creation de la variable MomentArm dans le dossier du muscle
+  Mus.name = {AnyVar MomentArm = -1 * LmtDot/..AngularVelocity;}; \
+  // Creation d'un dossier qui stocke aussi les MomentArm de chaque muscle
+  AnyVar name = -1 * Mus.name.LmtDot/AngularVelocity;
+  #include  "ArmMuscleList.any"
+
+};

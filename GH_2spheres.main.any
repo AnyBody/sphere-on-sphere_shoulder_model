@@ -1,0 +1,202 @@
+
+#include "libdef.any"
+
+Main = 
+{  
+  
+  // Body Model configuration:
+  #include "Model/BodyModelConfiguration.any"
+  
+  // Input Parameters. To modify at each simulation
+  #include "Input/InputVariables.any"
+  
+  // Using your own Mannequin.any file in the Model folder of your model
+  #include "Model\Mannequin.any"
+  
+  // Include default human model
+  #include "<ANYBODY_PATH_BODY>\HumanModel.any"
+  
+  #define FileToLoadName "GH_2spheres.main"
+  
+  
+  AnyFolder Model = 
+  {
+    // A link to the human model
+    AnyFolder &BodyModel = .HumanModel.BodyModel;
+    AnyFolder &DefaultMannequinDrivers = .HumanModel.DefaultMannequinDrivers;
+    
+    // Environment files are used to include objects surrounding human
+    #include "Model\Environment.any"   
+    
+    AnyFolder ModelEnvironmentConnection = 
+    {
+      //'JointsAndDrivers.any' file can include all kinematic constraints such as joints and drivers
+      #include "Model\JointsAndDrivers.any"
+      // Additional reactions which are required to run the inverse dynamics analysis
+      #include "Model\Reactions.any"
+    };
+    
+    // New definition of the GH joint: sphere on sphere joint
+    #include "Model\Jnt2spheres.any" 
+    
+    // Torus de contournement pour le supra
+    #include "Model\MySupraspinatusWrapping.any"
+    
+    //Torus de contournement subscap
+    #include "Model\MySubscapWrapping.any"
+
+    
+    // Force muscle contribution
+    #include "Model/AnyForceMomentMeasure.any"
+        
+    
+    // Hides the old GHReactions lines and nodes
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeLine1.line.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeLine2.line.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeLine3.line.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeLine4.line.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeLine5.line.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeLine6.line.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeLine7.line.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeLine8.line.Visible = Off;
+    
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.GHReactionCenterNodeRotated.CavityEdgeNode1.node.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.GHReactionCenterNodeRotated.CavityEdgeNode2.node.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.GHReactionCenterNodeRotated.CavityEdgeNode3.node.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.GHReactionCenterNodeRotated.CavityEdgeNode4.node.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.GHReactionCenterNodeRotated.CavityEdgeNode5.node.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.GHReactionCenterNodeRotated.CavityEdgeNode6.node.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.GHReactionCenterNodeRotated.CavityEdgeNode7.node.Visible = Off;
+    Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.GHReactionCenterNodeRotated.CavityEdgeNode8.node.Visible = Off;
+    
+  };
+  
+  AnyBodyStudy Study = 
+  {
+    AnyFolder &Model = .Model;  
+    
+    Gravity={0.0, -9.81, 0.0};
+    nStep = 70;
+    // Overdeterminate solver is needed while using the 
+    // soft default mannequin drivers.
+    //    Kinematics.SolverType = KinSolOverDeterminate;
+    //    InitialConditions.SolverType = Kinematics.SolverType ;
+    InverseDynamics.ForceDepKinOnOff=On;
+    InverseDynamics.ForceDepKin.MaxIteration=50;
+    Main.Study.InverseDynamics.ForceDepKin.ForceTol = 5.0;
+    
+    
+    InverseDynamics.Criterion = {
+//      Type = MR_Polynomial;
+      Type = MR_MinMaxAux;
+      AuxQuadraticTerm.Weight = 0.1;
+      
+    }; // p=3 by default for polynomial
+    
+    //exclusion of the old GHJoint et sa reaction et l'ancien supra pineux
+        
+MechObjectExclude = arrcat(
+    {
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GlenoHumeralJoint,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GlenoHumeralJoint.Constraints,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeMuscle1,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeMuscle2,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeMuscle3,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeMuscle4,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeMuscle5,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeMuscle6,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeMuscle7,
+        &Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHReactions.EdgeMuscle8
+    },
+    ObjSearch("Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.supraspinatus_*", "AnyMechObject"),
+    ObjSearchRecursive("Main.HumanModel.BodyModel.Right.ShoulderArm.Mus", "supraspinatus_*.*", "AnyMechObject")
+);    
+     
+    //Excludes the old GHJoint for in the calibration sequencen
+    //Comment if not using MusclesHill model
+    
+    Main.HumanModel.Calibration.RightArmCalibration0.ArmCalibrationStudy0.MechObjectExclude =  
+    arrcat(
+    ObjSearchRecursive("Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GlenoHumeralJoint","*","AnyMechObject"));
+    
+    Main.HumanModel.Calibration.RightArmCalibration1.ArmCalibrationStudy1.MechObjectExclude =  
+    arrcat(
+    ObjSearchRecursive("Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GlenoHumeralJoint","*","AnyMechObject"));
+    
+    Main.HumanModel.Calibration.RightArmCalibration2.ArmCalibrationStudy2.MechObjectExclude =  
+    arrcat(
+    ObjSearchRecursive("Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GlenoHumeralJoint","*","AnyMechObject"));
+    
+    Main.HumanModel.Calibration.RightArmCalibration3.ArmCalibrationStudy3.MechObjectExclude =  
+    arrcat(
+    ObjSearchRecursive("Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GlenoHumeralJoint","*","AnyMechObject"));
+    
+    Main.HumanModel.Calibration.RightArmCalibration4.ArmCalibrationStudy4.MechObjectExclude =  
+    arrcat(
+    ObjSearchRecursive("Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GlenoHumeralJoint","*","AnyMechObject"));
+    
+    Main.HumanModel.Calibration.RightArmCalibration5.ArmCalibrationStudy5.MechObjectExclude =  
+    arrcat(
+    ObjSearchRecursive("Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GlenoHumeralJoint","*","AnyMechObject"));
+    
+    
+    
+    //    AnyString OutputFileName =ANYBODY_PATH_OUTPUT + ANYBODY_NAME_MAINFILE + "_F=" + strval(ForceF);
+    AnyString OutputFileName =ANYBODY_PATH_OUTPUT + ANYBODY_NAME_MAINFILE + "_F=";
+    
+    AnyVar JointAngleAbd =  Main.HumanModel.BodyModel.Right.ShoulderArm.InterfaceFolder.GlenohumeralAbduction.Pos[0]*180/pi  ;    
+    AnyVar JointAngleFlx =  Main.HumanModel.BodyModel.Right.ShoulderArm.InterfaceFolder.GlenohumeralFlexion.Pos[0]*180/pi  ;
+    
+    #include "Model\EvaluateAbductionMomentArm.any"
+//    #include "Model\EvaluateFlexionMomentArm.any"
+
+    //Sub acromial measure
+//    #include "Model/SubAcroMeasure.any"
+
+    
+    #include "Model\AnyOutputFile.any"
+    
+    //Force de reaction de l'humerus dans la glene
+    AnyOutputFun HumReacForce = {
+      Val = Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GH_contact.Reaction.RefFrameOutput.F[0]*Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.gh.Glenoid_contact_ref.Axes;
+    };
+    
+    
+  }; // end of study
+  
+  
+  //  AnyKinStudy MomentArmStudy = {
+  //     Gravity = {0,0,0};
+  //   nStep = 40;  
+  //  Kinematics.SmallStepAssumptionOnOff = Off;
+  //  InitialConditions.SmallStepAssumptionOnOff = Off;
+  //
+  //    
+  //     AnyFolder &Model = .Model;
+  //     
+  //    AnyFolder MomentArmCalculations = {
+  //    AnyFolder Abscissa = { 
+  //      AnyVar JointAngle =  Main.HumanModel.BodyModel.Right.ShoulderArm.InterfaceFolder.GlenohumeralAbduction.Pos[0]*180/pi  ;    
+  //    };
+  //#define _CODE_MACRO_(name) AnyVar name = ( -1*.Model.MusRef.name.LmtDot/.Model.Drivers.AngularVelocity);    
+  //        #include "armmuscles_for_output.any"
+  //#undef _CODE_MACRO_
+  //  };  
+  //  };
+  
+  
+  
+  #include "Model\RunAppSequence.any"
+  
+  
+  
+  
+  
+}; //Main
+
+
+
+
+
+
+

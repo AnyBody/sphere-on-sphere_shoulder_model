@@ -1,0 +1,52 @@
+AnyFolder MyScalingLaw = {
+  
+  // Scripts that contain source points and target points (where some points on the acromion are offseted) 
+  #include "ScapulaSourcePoints.any"
+  #include "ScapulaTargetPoints.any"
+  
+  AnyFunTransform3DLin2 AffineTransform = {
+    Points0 = .PointsAffine0;
+    
+    Points1 = .PointsAffine1;
+    Mode = VTK_LANDMARK_AFFINE;
+  };
+  
+  AnyFunTransform3DRBF RBFTransform = {
+    PreTransforms = {&.AffineTransform};
+    
+    PolynomDegree = 1;
+    RBFDef = {
+      Type = RBF_Triharmonic;
+      Param = 1;
+    };
+    
+    Points0 = .PointsRBF0;  
+    
+    PointNames = .PointsName0;
+    Points1 = .PointsRBF1;
+  }; // RBFTransform
+  
+  AnyFunTransform3DLin2 ReversedTransform = {
+    Points0 = .AffineTransform.Points1;
+    Points1 = .AffineTransform.Points0;
+    Mode = VTK_LANDMARK_RIGIDBODY;
+  };
+  
+  // Final transform function used to scale the scapula
+  AnyFunTransform3DIdentity MyTransform =
+  {
+    PreTransforms = {&.RBFTransform};
+  };
+  
+  
+  
+};  // MyScalingLaw
+
+
+
+
+
+
+
+
+

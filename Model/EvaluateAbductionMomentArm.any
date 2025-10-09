@@ -1,0 +1,69 @@
+ AnyFolder EvaluateMomentArms = {
+  
+  AnyFolder &Mus=Main.HumanModel.BodyModel.Right.ShoulderArm.Mus;
+ 
+  // Mettre la meme formule que celle mise dans la vitesse angulaire du driver d'abduction dans AngularVelocity  
+  AnyVar AngularVelocity = 140*pi/180;
+  
+
+  #define _CODE_MACRO_(name) \
+  // Creation de la variable MomentArm dans le dossier du muscle
+  Mus.name = {AnyVar MomentArm = -1 * LmtDot/..AngularVelocity;}; \
+  // Creation d'un dossier qui stocke aussi les MomentArm de chaque muscle
+  AnyVar name = -1 * Mus.name.LmtDot/AngularVelocity;
+  #include  "ArmMuscleList.any"
+
+};
+
+//AnyFolder MomentArmsDOF = {
+//  
+//   AnyFolder &Mus=Main.HumanModel.BodyModel.Right.ShoulderArm.Mus;
+// 
+//  // Mettre la meme formule que celle mise dans la vitesse angulaire du driver d'abduction dans AngularVelocity  
+////  AnyVar AngularVelocityX = Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.GHrot.Vel[0];
+//  AnyVar AngularVelocity = 120*pi/180;
+//
+//  #define _CODE_MACRO_(name) \
+//  // Creation de la variable MomentArm dans le dossier du muscle
+//  Mus.name = {AnyVar MomentArmRotX = -1 * LmtDot/..AngularVelocity;}; \
+////  Mus.name = {AnyVar MomentArmRotY = -1 * LmtDot/..AngularVelocity;}; \
+////  Mus.name = {AnyVar MomentArmRotz = -1 * LmtDot/..AngularVelocity;}; \
+//  // Creation d'un dossier qui stocke aussi les MomentArm de chaque muscle
+//  AnyVar name = -1 * Mus.name.LmtDot/AngularVelocity;
+//  #include  "ArmMuscleList.any"
+
+//};
+
+
+//AnyFolder MomentArmFromFM ={
+//  AnyFolder MomentArmInfra = {
+//  
+//// Moment arm for rotational DOFs
+//AnyFloat MomentArmDelt_post_RotX = Main.Model.ForceMeasure_delt_post.M[0] / Main.Model.ForceMeasure_delt_post.F[0];
+//
+////AnyFloat MomentArmInfraRotY = Select(Main.Model.ForceMeasure_infra.F[1] > 1e-6, 
+////                                Main.Model.ForceMeasure_infra.M[1] / Main.Model.ForceMeasure_infra.F[1], 
+////                                0); 
+////AnyFloat MomentArmInfraRotZ = Select(Main.Model.ForceMeasure_infra.F[2] > 1e-6, 
+////                                Main.Model.ForceMeasure_infra.M[2] / Main.Model.ForceMeasure_infra.F[2], 
+////                                0); 
+//}; 
+//
+//}; 
+
+//AnyFolder MomentArmsDOF = {
+//    AnyFolder &Mus=Main.HumanModel.BodyModel.Right.ShoulderArm.Mus;
+//  
+//    AnyVar AngularVelocity = 120*pi/180;
+//  
+//  #define _CODE_MACRO_(name) \
+//  // Creation de la variable MomentArm dans le dossier du muscle
+//  Mus.name = {AnyVar MomentArmRotX = -1 * LmtDot/..AngularVelocity;};
+////  Mus.name = {AnyVar MomentArmRotY = -1 * LmtDot/..AngularVelocity;};
+////  Mus.name = {AnyVar MomentArmRotZ = -1 * LmtDot/..AngularVelocity;};
+//  \
+//  // Creation d'un dossier qui stocke aussi les MomentArm de chaque muscle
+//  AnyVar name = -1 * Mus.name.LmtDot/AngularVelocity;
+//  #include  "ArmMuscleList.any"
+//
+//}; 

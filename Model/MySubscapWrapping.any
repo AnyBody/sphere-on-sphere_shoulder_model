@@ -1,0 +1,32 @@
+// Adaptation of the AMMR 3.0.1 definition of the supraspinatus
+//#include "MySupraspinatusMusMdl.any"
+
+// New wrapping surfaces
+Main.HumanModel.BodyModel.Trunk.SegmentsThorax.ThoraxSeg.ij = {
+  
+  AnySurfEllipsoid MySubscapWrappingSurface = { 
+    sRel = {7.70372e-34, -0.3053356, 0.03816695}; 
+    ARel = RotMat(sRel, P1, P3);
+
+    //These three points are sued for controlling the elipsoid (from serratus anterior ellipsoid)
+    AnyVec3 P1 = {-0.170204, -0.3053356, 0.03816695}; 
+    AnyVec3 P2 = {-7.70372e-34, -0.2874229, -0.06342006}; 
+    AnyVec3 P3 = {-3.85186e-33, 0.0658483, 0.09906902}; 
+    
+//    AnyVar R1=0.170204; //medlat
+//    AnyVar R2=0.1031542; //antpost
+    AnyVar R1=0.20;
+    AnyVar R2=0.13;
+    AnyVar R3=0.376147;
+    Radius = {R1,R3,R2};
+  };
+
+  
+}; // ThoraxSeg
+
+
+
+
+
+
+

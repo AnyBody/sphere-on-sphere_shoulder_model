@@ -1,0 +1,16 @@
+// Measure of the subacromial space define as the shortest distance between the acromion and the humerus (Bey at al. 2007)
+
+Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus = {
+  AnySurfSTL surf = {
+    FileName = .DrwSurf.FileName;
+    AnyFunTransform3D &scale = .Scale;
+  };
+};
+
+AnyKinPointSurface PsurfMeas = {
+  AnyRefFrame &Acromion = Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.deltoideus_lateral_part_3.Org;
+  AnySurface &Hum = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.surf;
+      viewKinMeasure.Visible = On;
+
+};
+

@@ -1,0 +1,96 @@
+/* INPUTVARIABLES.ANY
+Variables and parameters to modify at each simulation.
+*/
+
+AnyFolder InputVariables = {
+  
+  /* -- FILES/FOLDERS NAMES --
+  m_ResultFile :   Name for results file (saved as .txt or .h5)
+  m_ResultFolder : Name for folder results. !!Must be created on computer before!!
+  m_ResultPath :   Complete path to the "NameFolder" folder
+  WARNING:    Be sure that the m_ResultFolder variable refers to an existing folder on your computer !!
+  ----------------------------- */
+  //  #define m_ResultFile "Results_17_07_2015_version_neutre"
+  //  #define m_ResultFolder "Ceraver\"
+  //  #define m_ResultPath "C:\Users\p0077871\Documents\PRe\Results\Analyse Version\"
+  
+  
+  
+  
+  AnyFolder MorphotypeParameters = 
+  {
+    AnyVar rh = 0.0236; //SSM model moyen
+    AnyVar rg = 0.0316;
+    //    AnyVar rh = 0.020; 
+    //    AnyVar rg = 0.0201;
+    AnyVar AcromionScalingFactor = 0.0; //pas un scaling factor mais ajout de xx m.
+    AnyVar SupraHumScalingFactor = 0.0; //pas un scaling factor mais ajout de xx m.
+//        AnyFloat CoordoSup12 = {0.0168,    0.0075,   -0.0030}; //supra
+//        AnyFloat CoordoSup34 = {0.0188,    0.0065,    0.0047}; //supra
+//        AnyFloat CoordoSup56 = {0.0208,    0.0055,    0.0121}; //supra
+    
+    //position insertion subscapulaire
+//    AnyFloat CoordoSubscap12 = {-0.014159, 0.004191, -0.024937}; //valeure initiale
+//    AnyFloat CoordoSubscap34 = {-0.013783, -0.006596, -0.027658}; //valeure initiale
+//    AnyFloat CoordoSubscap56 = {-0.013608, -0.011478, -0.0289}; //valeure initiale
+
+    AnyFloat CoordoSubscap12 = {0.010044453, 0.013017269, -0.020425502}; 
+    AnyFloat CoordoSubscap34 = {0.0096274121, 0.0032718524, -0.029064769}; 
+    AnyFloat CoordoSubscap56 = {0.01415256, -0.0067591667, -0.025414219}; 
+
+    
+    
+    AnyFloat glenoid_offset = {0.0, 0.0, 0.0};
+    
+  };
+  
+  AnyFolder MusclesPersonalization = {
+    
+    AnyFloat F0DeltAnt = 65.3; //valeure ratio 2/1 65.3   
+    AnyFloat F0DeltLat = 101.1; //valeure ratio 2/1 101.1   
+    AnyFloat F0DeltPost = 44.2; //valeure ratio 2/1 44.2  
+    AnyFloat F0Supra = 500;//valeure initiale 70.2  
+    AnyFloat F0Subscap_sup = 225.0; //valeure initiale 225.0
+    AnyFloat F0Subscap_inf = 225.0; //valeure initiale 225.0   
+    AnyFloat F0Infra = 200; //valeure initiale 122.58
+    
+    AnyFloat SphereSupraWrapR = 0.028;
+    
+    AnyFloat DeltLat1ElliX = 0.03;
+    AnyFloat DeltLat1ElliH = 0.03;
+    
+    
+    //    Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.DeltoidWrappingLateral.WrappingSegment.RotNode.Wrapping_1.Surf.Radius
+    
+  };
+  
+  AnyFolder FDK = 
+  {
+    //          Modele Lauranne 
+    //     AnyVar k0 = 10.75;   
+    //      AnyVar k1 = -7.787;  
+    //      AnyVar k2 = 4.391;
+    //      AnyVar k3 = 0;
+    //      AnyVar k4 = -0.08637 ; 
+    //      AnyVar kz = 10.75;   //ML (Lat=+). NB: ML managed by contact between prosthetic components
+    ////      
+    //     AnyVar k0 = 10.75;   
+    //      AnyVar k1 = -7.787;  
+    //      AnyVar k2 = 4.391;
+    //      AnyVar k3 = 0;
+    //      AnyVar k4 = -0.08637 ; 
+    //      AnyVar kz = 100; 
+    
+    AnyVar kML = 0.0;
+    AnyVar kIS = 0.0;
+    AnyVar kAP = 0.0;
+    
+    
+  };
+  
+};
+
+
+
+
+

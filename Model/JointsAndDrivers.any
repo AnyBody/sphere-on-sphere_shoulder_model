@@ -1,0 +1,86 @@
+AnyFolder Joints = 
+{
+//    AnyKinEq HandDumbbell = {
+//    AnyKinLinear lin = {
+//      AnyRefFrame &Hand = Main.Model.BodyModel.Right.ShoulderArm.Seg.Hand.Ref.PalmJoint;
+//      AnyRefFrame &DumbBell = Main.Model.EnvironmentModel.Dumbbell;
+//    };
+//    AnyKinRotational rot = {
+//      AnyRefFrame &Hand = Main.Model.BodyModel.Right.ShoulderArm.Seg.Hand.Ref.PalmJoint;
+//      AnyRefFrame &DumbBell = Main.Model.EnvironmentModel.Dumbbell;
+//      Type = RotAxesAngles;
+//    };
+//  };
+};
+
+AnyFolder Drivers = 
+{
+  AnyKinEqSimpleDriver GHDriverRight={
+    AnyKinMeasure& ref1 =...BodyModel.Interface.Right.GlenohumeralAbduction;
+    DriverPos = {10*pi/180};
+    DriverVel = {140*pi/180};
+    Reaction.Type = {Off};  
+  }; 
+  
+//  AnyReacForce GHbalance = {
+//  AnyKinMeasure& ref = ...BodyModel.Interface.Right.GlenohumeralAbduction;
+//}; //vieux test ? ne pas utiliser
+
+// Definition de la flexion
+// AnyKinEqSimpleDriver GHFlexion = {
+//   
+//  AnyKinMeasure& ref1 =...BodyModel.Interface.Right.GlenohumeralFlexion;
+//   
+//    DriverPos = {10*pi/180};
+//    DriverVel = {0*pi/180};
+//    Reaction.Type = {Off};
+//   
+//  };
+  
+
+//   Definition de la ExternalRotation
+
+//  AnyKinEqSimpleDriver GHExternalRotation = {
+//   
+//   AnyKinMeasure& ref1 =...BodyModel.Interface.Right.GlenohumeralExternalRotation;
+//   
+//    DriverPos = {30*pi/180};
+//    DriverVel = {0};
+//    Reaction.Type = {Off};
+//   
+//  };
+//
+//AnyKinEqSimpleDriver ElbowFlexion = {
+//   
+//   AnyKinMeasure& ref1 =...BodyModel.Interface.Right.ElbowFlexion;
+//   
+//    DriverPos = {0};
+//    DriverVel = {0};
+//    Reaction.Type = {Off};
+//   
+//  };
+
+ 
+  //Definition de la rotation et flexion pour que l'abduction soit dans le plan de la scapula//
+AnyKinEqSimpleDriver GHFlexion = {
+   
+    AnyKinMeasureLinComb& ref1 =...BodyModel.Interface.Right.ScapulaHumerus.PlaneOfElevation;
+   
+    DriverPos = {0};
+    DriverVel = {0};
+    Reaction.Type = {Off};
+   
+  };
+ 
+
+//   Sets the axial rotation to 0
+  AnyKinEqSimpleDriver GHAxialRotation={
+   
+    AnyKinMeasureLinComb &ref3 =...BodyModel.Interface.Right.ScapulaHumerus.InternalAxialRotation;
+   
+    DriverPos={0};
+    DriverVel = {0};
+    Reaction.Type={Off};
+  };
+};
+

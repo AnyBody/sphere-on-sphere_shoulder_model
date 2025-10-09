@@ -1,0 +1,153 @@
+// Shortcuts
+AnyFolder &Jnt = Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt;
+AnyFolder &Seg = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg;
+AnyFolder &Mus = Main.HumanModel.BodyModel.Right.ShoulderArm.Mus;
+
+
+
+
+
+// Save in a *.txt file
+AnyOutputFile FileOut = {
+  FileName = .OutputFileName + ".txt";
+  
+  NumberFormat.Digits = 6;
+  
+  // Header
+  Header = {
+    TitleSectionOnOff = On;
+    ConstSectionOnOff = On;
+    VarSectionOnOff = On;
+    ColumnNamesOnOff = On;  //swicth the column names on/off
+    LinePrefix = "";
+    ShortenNamesOnOff = Off;
+    
+  };     
+  //-----------------SIMULATIONS PARAMETERS----------------------------
+  // Input Values 
+  AnyVar nstep = Main.Study.nStep;
+  
+  AnyVar rg = Main.InputVariables.MorphotypeParameters.rh; 
+  AnyVar rh = Main.InputVariables.MorphotypeParameters.rg;
+  AnyVar AcromionScalingFactor = Main.InputVariables.MorphotypeParameters.AcromionScalingFactor;
+  AnyVar SupraHumScalingFactor = Main.InputVariables.MorphotypeParameters.SupraHumScalingFactor;
+  AnyFloat glenoid_offset = Main.InputVariables.MorphotypeParameters.glenoid_offset;
+//  AnyFloat Elli_subscap_radius = Main.HumanModel.BodyModel.Trunk.SegmentsThorax.ThoraxSeg.ij.MySubscapWrappingSurface.Radius;
+  
+//    AnyFloat CoordoSup12 = Main.InputVariables.MorphotypeParameters.CoordoSup12; 
+//    AnyFloat CoordoSup34 = Main.InputVariables.MorphotypeParameters.CoordoSup34;
+//    AnyFloat CoordoSup56 = Main.InputVariables.MorphotypeParameters.CoordoSup56;
+
+AnyFloat CordooSubscap12 = Main.InputVariables.MorphotypeParameters.CoordoSubscap12;
+AnyFloat CordooSubscap34 = Main.InputVariables.MorphotypeParameters.CoordoSubscap34;
+AnyFloat CordooSubscap56 = Main.InputVariables.MorphotypeParameters.CoordoSubscap56;
+
+  
+  AnyFloat F0DeltAnt1 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_anterior_part_1.F0;
+  AnyFloat F0DeltAnt2 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_anterior_part_2.F0;
+  AnyFloat F0DeltAnt3 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_anterior_part_3.F0;
+  AnyFloat F0DeltAnt4 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_anterior_part_4.F0;
+  
+  AnyFloat F0DeltLat1 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_lateral_part_1.F0;
+  AnyFloat F0DeltLat2 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_lateral_part_2.F0;
+  AnyFloat F0DeltLat3 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_lateral_part_3.F0;
+  AnyFloat F0DeltLat4 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_lateral_part_4.F0;
+  
+  AnyFloat F0DeltPost1 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_posterior_part_1.F0;
+  AnyFloat F0DeltPost2 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_posterior_part_2.F0;
+  AnyFloat F0DeltPost3 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_posterior_part_3.F0;
+  AnyFloat F0DeltPost4 = Main.HumanModel.BodyModel.Right.ShoulderArm.MuscleModels.deltoideus_posterior_part_4.F0;
+  
+//  AnyFloat F0Subscap1 = Main.InputVariables.MusclesPersonalization.F0Subscap1;
+//  AnyFloat F0Subscap2 = Main.InputVariables.MusclesPersonalization.F0Subscap2;
+//  AnyFloat F0Subscap3 = Main.InputVariables.MusclesPersonalization.F0Subscap3;
+//  AnyFloat F0Subscap4 = Main.InputVariables.MusclesPersonalization.F0Subscap4;
+//  AnyFloat F0Subscap5 = Main.InputVariables.MusclesPersonalization.F0Subscap5;
+//  AnyFloat F0Subscap6 = Main.InputVariables.MusclesPersonalization.F0Subscap6;
+//  
+//  AnyFloat F0Infra1 = Main.InputVariables.MusclesPersonalization.F0Infra1;
+//  AnyFloat F0Infra2 = Main.InputVariables.MusclesPersonalization.F0Infra2;
+//  AnyFloat F0Infra3 = Main.InputVariables.MusclesPersonalization.F0Infra3;
+//  AnyFloat F0Infra4 = Main.InputVariables.MusclesPersonalization.F0Infra4;
+//  AnyFloat F0Infra5 = Main.InputVariables.MusclesPersonalization.F0Infra5;
+//  AnyFloat F0Infra6 = Main.InputVariables.MusclesPersonalization.F0Infra6;
+//  
+//  AnyFloat F0Supra1 = Main.InputVariables.MusclesPersonalization.F0Supra1;
+//  AnyFloat F0Supra2= Main.InputVariables.MusclesPersonalization.F0Supra2;
+//  AnyFloat F0Supra3= Main.InputVariables.MusclesPersonalization.F0Supra3;
+//  AnyFloat F0Supra4= Main.InputVariables.MusclesPersonalization.F0Supra4;
+//  AnyFloat F0Supra5= Main.InputVariables.MusclesPersonalization.F0Supra5;
+//  AnyFloat F0Supra6= Main.InputVariables.MusclesPersonalization.F0Supra6;
+  
+//  AnyFloat SphereSupraWrapR = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.gh.surface.Radius;
+//  AnyFloat RadiusElliDelt1 = Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.DeltoidWrappingLateral.WrappingSegment.RotNode.Wrapping_1.Surf.Radius;
+//  AnyFloat RadiusElliDelt2 = Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.DeltoidWrappingLateral.WrappingSegment.RotNode.Wrapping_2.Surf.Radius;
+//  AnyFloat RadiusElliDelt3 = Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.DeltoidWrappingLateral.WrappingSegment.RotNode.Wrapping_3.Surf.Radius;
+//  AnyFloat RadiusElliDelt4 = Main.HumanModel.BodyModel.Right.ShoulderArm.Mus.DeltoidWrappingLateral.WrappingSegment.RotNode.Wrapping_4.Surf.Radius;
+  
+//  AnyFloat ExtRot = Main.Model.ModelEnvironmentConnection.Drivers.ExtRot;
+//  AnyFloat ElbFlex = Main.Model.ModelEnvironmentConnection.Drivers.ElbFlex;
+//  
+  //  AnyVar DumbellMass = Main.Model.EnvironmentModel.Dumbbell.Mass;
+  
+  //  AnyVar k0 = Main.InputVariables.FDK.k0;   
+  //  AnyVar k1 = Main.InputVariables.FDK.k1;  
+  //  AnyVar k2 = Main.InputVariables.FDK.k2;
+  //  AnyVar k3 = Main.InputVariables.FDK.k3;
+  //  AnyVar k4 = Main.InputVariables.FDK.k4; 
+  //  AnyVar kz = Main.InputVariables.FDK.kz;
+  
+  AnyVar kML = Main.InputVariables.FDK.kML;
+  AnyVar kIS = Main.InputVariables.FDK.kIS;
+  AnyVar kAP = Main.InputVariables.FDK.kAP;
+  
+  
+  AnyVector abduction = Main.HumanModel.BodyModel.Interface.Right.GlenohumeralAbduction.Pos;
+  AnyVector flexion = Main.HumanModel.BodyModel.Interface.Right.GlenohumeralFlexion.Pos;
+  
+  //  
+  //  AnyVec3 Ins = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_deltoideus_lateral_part_2.r;
+  //  AnyVec3 Ori = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.gh.r;
+  //  
+  //  AnyVec3 BicLOri = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_biceps_brachii_caput_longum.r;
+  //  AnyVec3 BicLVP1 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.sulcus_intertubercularisTop.r;
+  //  AnyVec3 BicLVP2 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.sulcus_intertubercularisTop.r;
+  //  AnyVec3 BicLIns = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Radius.I_Biceps_LH.r;
+  //  
+  //  AnyVec3 sRelBicOri = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_biceps_brachii_caput_longum.sRel;
+  //  AnyVec3 sRelBicVP1 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.sulcus_intertubercularisTop.sRel;
+  //  AnyVec3 sRelBicVP2 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.sulcus_intertubercularis.sRel;
+  //  AnyVec3 sRelBicIns = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Radius.I_Biceps_LH.sRel;
+  //  
+  //  
+  //  AnyVec3 SupraOri1 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_supraspinatus_1.r;
+  //  AnyVec3 SupraOri2 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_supraspinatus_2.r;
+  //  AnyVec3 SupraOri3 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_supraspinatus_3.r;
+  //  AnyVec3 SupraOri4 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_supraspinatus_4.r;
+  //  AnyVec3 SupraOri5 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_supraspinatus_5.r;
+  //  AnyVec3 SupraOri6 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Scapula.O_supraspinatus_6.r;
+  //  AnyVec3 SupraIns1 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.I_supraspinatus_1.r;
+  //  AnyVec3 SupraIns2 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.I_supraspinatus_2.r;
+  //  AnyVec3 SupraIns3 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.I_supraspinatus_3.r;
+  //  AnyVec3 SupraIns4 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.I_supraspinatus_4.r;
+  //  AnyVec3 SupraIns5 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.I_supraspinatus_5.r;
+  //  AnyVec3 SupraIns6 = Main.HumanModel.BodyModel.Right.ShoulderArm.Seg.Humerus.I_supraspinatus_6.r;
+  
+  //  AnyFloat SpringForce = Main.HumanModel.BodyModel.Right.ShoulderArm.Jnt.ShoulderPE.F;
+  AnyEnumMuscleRecruitmentType MuscleRecruitment = Main.Study.InverseDynamics.Criterion.Type;
+  AnyVar ForceDepKinError = Main.Study.InverseDynamics.ForceDepKinError;
+  AnyFloat ForceTOlFdk = Main.Study.InverseDynamics.ForceDepKin.ForceTol;
+  
+};
+
+
+
+
+
+
+
+
+
+
+
+

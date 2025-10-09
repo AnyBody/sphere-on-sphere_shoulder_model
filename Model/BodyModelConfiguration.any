@@ -1,0 +1,38 @@
+#path __BM_PLUGIN_FILE__ "BodyModelConfiguration.any"
+#define BM_CONFIG_PLUGIN __BM_PLUGIN_FILE__
+
+// -----------------------------------------------------------------------------------
+// The BodyModel configuration can be modified using BodyModel GUI plugin
+// or by manually editing this file.
+//
+// Please see this this file for more information on the options:
+// #path HTML_DOC "<AMMR_PATH_DOC>/bm_config/index.html"
+// -----------------------------------------------------------------------------------
+
+// Enable the TLEM2 lower extremity model
+#define BM_LEG_MODEL _LEG_MODEL_TLEM2_
+#define BM_LEG_LEFT OFF
+#define BM_LEG_RIGHT OFF
+#define BM_ARM_LEFT OFF
+
+/*------------- SCALING CONFIGURATION SECTION --------------------*/
+// Actual scaling law
+//#define BM_CUSTOM_SCALING_Right_Scapula
+//#define BM_CUSTOM_SCALING_Right_Humerus
+//#include "CustomScaling.any" // scaling from SSM morphotypes
+#include "ScalingCustom_muscle_insertion.any" // scaling directly muscles insertions
+
+ //--------------- END OF SCALING CONFIGURATION -------------------
+
+
+#define BM_ARM_MUSCLES_RIGHT _MUSCLES_3E_HILL_
+#define BM_TRUNK_LUMBAR_MUSCLES OFF
+#define BM_TRUNK_CERVICAL_MUSCLES _MUSCLES_SIMPLE_
+#define BM_MANNEQUIN_DRIVER_GLENOHUMERAL_ABDUCTION_RIGHT OFF
+//#define BM_ARM_SHOULDER_RHYTHM_RIGHT OFF
+#define BM_ARM_SHOULDER_RHYTHM ON
+
+//desactivation de la flexion et rotation pour les definir dans le plan de la scapula
+#define BM_MANNEQUIN_DRIVER_GLENOHUMERAL_FLEXION_RIGHT OFF
+#define BM_MANNEQUIN_DRIVER_GLENOHUMERAL_EXTERNAL_ROTATION_RIGHT OFF
+//#define BM_MANNEQUIN_DRIVER_ELBOW_FLEXION_RIGHT ON
