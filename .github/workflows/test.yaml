@@ -1,4 +1,4 @@
-name: Pipeline
+name: "Sphere-on-sphere model test"
 on:
     push:
         branches: [ main ]
