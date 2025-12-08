@@ -14,12 +14,12 @@ jobs:
     runs-on: windows-latest
     steps:
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           path: sos-shoulder-model
 
       - name: Checkout AMMR
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: AnyBody/ammr
           ref: master
@@ -30,7 +30,7 @@ jobs:
         run: |
             echo #include "%GITHUB_WORKSPACE%/ammr/libdef.any" > libdef.any
 
-      - uses: prefix-dev/setup-pixi@v0.9.1
+      - uses: prefix-dev/setup-pixi@v0.9.3
         with:
           manifest-path: sos-shoulder-model/pixi.toml
           activate-environment: true
